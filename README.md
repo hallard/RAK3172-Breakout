@@ -61,6 +61,8 @@ use only what you need dependings on what you want to do.
 
 Check [BOM](https://github.com/hallard/RAK3172-Breakout/blob/main/RAK3172-Breakout-BOM.xlsx) File.
 
+PS : 100uF 0805 capacitors C4,C5,C6 and C7 are for use with coin cell battery, no need to put them if not powering from coin.
+
 License
 =======
 
