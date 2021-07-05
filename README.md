@@ -1,11 +1,16 @@
 RAK3172 breakout board
 ======================
 
-<img src="https://github.com/hallard/LoRa-E5-Breakout/blob/main/pictures/LoRa-E5-Breakout-top.png">
+<!--
+<img src="https://github.com/hallard/RAK3172-Breakout/blob/main/pictures/RAK3172-Breakout-top.png">
+-->
 
 I'm using mainly to flash custom firmware in it, and not using AT default firmware.
 
-**These boards have been received, assembled, and works as expected**
+<!--
+**These boards have not been received, assembled, and works as expected**
+-->
+**These boards have not been received, use them at your own risk for now**
 
 - RAK3172 Module
 - No USB/Serial, SMD FTDI 6 pins connector (**use 3.3V FTDI One, not 5V**)
@@ -24,7 +29,7 @@ No specific documentation for now, it's just a kind of wiring helper as schemati
 Schematic
 =========
 
-<img src="https://github.com/hallard/RAK3172-Breakout/blob/main/pictures/RAK3172-sch.png">
+<img src="https://github.com/hallard/RAK3172-Breakout/blob/main/pictures/RAK3172-Breakout-sch.png">
 
 Boards 
 ======
@@ -54,7 +59,7 @@ Bill Of Material
 Nothing fancy, all components are 0805 and/or PTH and can be ordered almost anywhere (digikey, mouser, radiospare, ...). 
 use only what you need dependings on what you want to do. 
 
-Check Seeed format [BOM](https://github.com/hallard/RAK3172-Breakout/blob/main/RAK3172-Breakout-BOM.xlsx) File, check on [Seeed OPL](https://www.seeedstudio.com/opl.html) for manufacturer SKU match.
+Check [BOM](https://github.com/hallard/RAK3172-Breakout/blob/main/RAK3172-Breakout-BOM.xlsx) File.
 
 License
 =======
