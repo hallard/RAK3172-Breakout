@@ -101,14 +101,9 @@ Now get the device keys information
 AT+DEVEUI=? 
 ac1f09fffe0527f5
 OK
-```
-
-```
 AT+APPEUI=? 
 ac1f09fff8683172
 OK
-
-```
 AT+APPKEY=? 
 ac1f09fffe0527f5ac1f09fff8683172
 OK
@@ -127,7 +122,6 @@ AT+APPKEY=?
 b3d2f9587ded7b03ad9f1809564192e0
 OK
 ```
-
 
 Set LoRaWAN Mode + OTAA + Class A + Frequency Plan EU868 (Band 4) + ADR
 ```
@@ -158,14 +152,14 @@ some seconds later you should have confirmation
 +EVT:JOINED
 ```
 
-Now send ascii "1234" confirmed message
+Now send ASCII "1234" confirmed message
 ```
 AT+SEND=2:31323334 
 OK
 +EVT:SEND CONFIRMED OK
 ```
 
-and here we go
+And here we go, all is working fine, now time to have some fun with custom firmware
 
 
 ### Compile and flash Firmware
