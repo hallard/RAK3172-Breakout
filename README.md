@@ -54,6 +54,120 @@ Check [BOM](https://github.com/hallard/RAK3172-Breakout/blob/main/RAK3172-Breako
 
 PS : 100uF 0805 capacitors C4,C5,C6 and C7 are for use with coin cell battery, no need to put them if not powering from coin. Also take care of contact is using cell coin
 
+
+### Test Board out of factory stock 
+
+When the boards are from factory, default AT firmware is flashed and thus we have the possibility to test the board before flashing custom firmware and maily also get defaults keys from device.
+
+To do so, connect a 3V3 FTDI Type USB/Serial to access Serial Console 
+
+> :warning: **Do not use 5V configured FTDI** 
+
+I personnaly use these one for [Sparkun](https://www.sparkfun.com/products/14050) but you can find clones anywhere on the Web.
+
+![](https://cdn.sparkfun.com/assets/parts/1/1/8/8/8/14050-01.jpg)
+
+Once done open Serial terminal (the one from FTDI Serial Port) configured as `9600` BPS `8N1`, no flow control, echo typed characters and set to CR+LF for enter key, press reset button and you should be able to see banner
+
+```
+LoRa (R) is a registered trademark or service mark of Semtech Corporation or its affiliates. LoRaWAN (R) is a licensed mark.
+
+______  ___   _   __  _    _ _          _               
+| ___ \/ _ \ | | / / | |  | (_)        | |              
+| |_/ / /_\ \| |/ /  | |  | |_ _ __ ___| | ___  ___ ___ 
+|    /|  _  ||    \  | |/\| | | '__/ _ \ |/ _ \/ __/ __|
+| |\ \| | | || |\  \ \  /\  / | | |  __/ |  __/\__ \__ \
+\_| \_\_| |_/\_| \_/  \/  \/|_|_|  \___|_|\___||___/___/
+========================================================
+RAK3172-H Version:v1.0.2 May 26 2021
+Current Work Mode: LoRaWAN.
+```
+
+Then type `AT` command to see if the RAK board answer, in this example the board answered `OK` which is correct
+```
+AT 
+OK
+```
+
+Now get the device version
+```
+AT+VER=? 
+V1.0.2
+OK
+```
+
+Now get the device keys information 
+```
+AT+DEVEUI=? 
+ac1f09fffe0527f5
+OK
+```
+
+```
+AT+APPEUI=? 
+ac1f09fff8683172
+OK
+
+```
+AT+APPKEY=? 
+ac1f09fffe0527f5ac1f09fff8683172
+OK
+```
+
+I'm using [TTN](https://www.thethingsnetwork.org/) for testing so please follow excellent RAK guide on how to provision your device onto TTN [here](https://docs.rakwireless.com/Product-Categories/WisDuo/RAK3172-Module/Quickstart/#connecting-to-the-things-network-ttn)
+
+In our case we will use the AppKey generated from TTN when provisionning device, just provision your device onto TTN, get the key and put into the device as follow with command `AT+APPKEY` in our case AppKey is `B3D2F9587DED7B03AD9F1809564192E0`
+```
+AT+APPKEY=B3D2F9587DED7B03AD9F1809564192E0 
+OK
+```
+Check it's ok
+```
+AT+APPKEY=?                                
+b3d2f9587ded7b03ad9f1809564192e0
+OK
+```
+
+
+Set LoRaWAN Mode + OTAA + Class A + Frequency Plan EU868 (Band 4) + ADR
+```
+AT+NWM=1 
+OK
+
+AT+NJM=1 
+OK
+
+AT+CLASS=A 
+OK
+
+AT+BAND=4 
+OK
+
+AT+ADR=1 
+OK
+```
+
+Now time to join (be sure device is provisioned on TTN and you have a TTN gateway around)
+```
+AT+JOIN=1:0:10:8 
+OK
+```
+
+some seconds later you should have confirmation
+```
++EVT:JOINED
+```
+
+Now send ascii "1234" confirmed message
+```
+AT+SEND=2:31323334 
+OK
++EVT:SEND CONFIRMED OK
+```
+
+and here we go
+
+
 ### Compile and flash Firmware
 
 You can flash the board with excellent [mbed-os](https://os.mbed.com/mbed-os/) framework. 
