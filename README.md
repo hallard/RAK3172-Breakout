@@ -74,10 +74,11 @@ Once IDE installed:
 
 ```json
         "RAK3172_BREAKOUT": {
-            "stm32wl-lora-driver.debug_tx": "PA_9",
-            "stm32wl-lora-driver.debug_rx": "PA_10",
-            "stm32wl-lora-driver.debug_invert": 1,
             "stm32wl-lora-driver.rf_switch_config": 2,
+            "stm32wl-lora-driver.crystal_select": 0,
+            "stm32wl-lora-driver.debug_rx": "LED1",
+            "stm32wl-lora-driver.debug_tx": "LED2",
+            "stm32wl-lora-driver.debug_invert": 1
         }
 ```
 
@@ -88,7 +89,7 @@ Then on IDE select target "RAK3172_BREAKOUT", build and flash with your favorite
 From IDE you can build the example. If you plug your STLink while project opened, mbed ide will ask you if you want to set it up for this project/target, once approved you can compile, flash and even debug from mbed ide (need some tools installed, [read](https://os.mbed.com/docs/mbed-studio/current/monitor-debug/debugging-with-mbed-studio.html), very nice.
 
 
-<img src="https://github.com/hallard/LoRa-E5-Breakout/blob/main/pictures/mbed-ide.png">
+<img src="https://github.com/hallard/RAK3172-Breakout/blob/main/pictures/RAK3172-Breakout-mbed-ide.png">
 
 You can also see logs with the FTDI adapter and any Serial terminal set to 115200 bauds 8 bits no parity 1 stop bit (8N1)
 
