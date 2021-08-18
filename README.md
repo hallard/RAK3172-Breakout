@@ -2,6 +2,8 @@
 
 <img src="https://github.com/hallard/RAK3172-Breakout/blob/main/pictures/RAK3172-Breakout-top.png">
 
+Based on [RAK3172](https://docs.rakwireless.com/Product-Categories/WisDuo/RAK3172-Module/Overview/) from RAK Wireless.
+
 I'm using mainly to flash custom firmware in it, and not using AT default firmware.
 
 **These boards have been received, assembled, and works as expected**
@@ -51,6 +53,62 @@ use only what you need dependings on what you want to do.
 Check [BOM](https://github.com/hallard/RAK3172-Breakout/blob/main/RAK3172-Breakout-BOM.xlsx) File.
 
 PS : 100uF 0805 capacitors C4,C5,C6 and C7 are for use with coin cell battery, no need to put them if not powering from coin. Also take care of contact is using cell coin
+
+### Compile and flash Firmware
+
+You can flash the board with excellent [mbed-os](https://os.mbed.com/mbed-os/) framework. 
+Easy way is to use [mbed studio IDE](https://os.mbed.com/studio/). 
+We added this board into [stm32customtargets](https://github.com/ARMmbed/stm32customtargets), don't hesitate to read the [readme](https://github.com/ARMmbed/stm32customtargets/blob/master/README.md). 
+Finally the main firmware [mbed-os-example-lorawan](https://github.com/ARMmbed/mbed-os-example-lorawan) program.
+
+Once IDE installed: 
+
+- use `file` / `import program` and them import the example with URL `https://github.com/ARMmbed/mbed-os-example-lorawan`
+- right click in the project name and select `Add Library` and enter `https://github.com/ARMmbed/stm32customtargets`
+- open the file `custom_targets.json` from folder `stm32customtargets` and copy whole contents
+- paste copied contents in the main root folder file `custom_targets.json` (yes replace the whole file) 
+- open the file `mbed_app.json` and change parameters on the section `target_overrides`
+    - LoRaWAN parameters such as frequency plan, OTAA, Duty Cycle, ...
+    - replace keys with the ones you got from above step `lora.device-eui`, `lora.application-eui` and `lora.application-key`
+- add the following section near the end of the file `mbed_app.json`.
+
+```json
+        "RAK3172_BREAKOUT": {
+            "stm32wl-lora-driver.debug_tx": "PA_9",
+            "stm32wl-lora-driver.debug_rx": "PA_10",
+            "stm32wl-lora-driver.debug_invert": 1,
+            "stm32wl-lora-driver.rf_switch_config": 2,
+        }
+```
+
+Then on IDE select target "RAK3172_BREAKOUT", build and flash with your favorite programmer (I'm using STLink) with GND/SWDIO/SWDCLK/RESET connected. 
+
+### Build and Flash
+
+From IDE you can build the example. If you plug your STLink while project opened, mbed ide will ask you if you want to set it up for this project/target, once approved you can compile, flash and even debug from mbed ide (need some tools installed, [read](https://os.mbed.com/docs/mbed-studio/current/monitor-debug/debugging-with-mbed-studio.html), very nice.
+
+
+<img src="https://github.com/hallard/LoRa-E5-Breakout/blob/main/pictures/mbed-ide.png">
+
+You can also see logs with the FTDI adapter and any Serial terminal set to 115200 bauds 8 bits no parity 1 stop bit (8N1)
+
+```
+Mbed LoRaWANStack initialized 
+ CONFIRMED message retries : 3 
+ Adaptive data  rate (ADR) - Enabled 
+ Connection - In Progress ...
+ Connection - Successful 
+ Dummy Sensor Value = 3 
+ 23 bytes scheduled for transmission 
+ Message Sent to Network Server 
+ Dummy Sensor Value = 5 
+ 23 bytes scheduled for transmission 
+ Message Sent to Network Server 
+ Dummy Sensor Value = 7 
+ 23 bytes scheduled for transmission 
+```
+
+Green LED will be on when on receive mode and Red when sending data.
 
 ## License
 
