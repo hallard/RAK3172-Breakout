@@ -6,7 +6,14 @@ Based on [RAK3172](https://docs.rakwireless.com/Product-Categories/WisDuo/RAK317
 
 I'm using mainly to flash custom firmware in it, and not using AT default firmware.
 
-**These boards have been received, assembled, and works as expected**
+##Changes log
+
+**V1.1**
+
+- Fixed Boot0 wiring to 3V3 instead of ground
+- Fixed BOM on schematics 
+
+**V1.0**
 
 - RAK3172 Module
 - No USB/Serial, SMD FTDI 6 pins connector (**use 3.3V FTDI One, not 5V**)
@@ -29,7 +36,9 @@ No specific documentation for now, it's just a kind of wiring helper as schemati
 
 You can order the board on [oshpark](https://oshpark.com). 
 
+- [V1.1](https://oshpark.com/shared_projects/s3n0gTxi) 
 - [V1.0](https://oshpark.com/shared_projects/Ss2INNiR) 
+
 
 It's a pitty after several discuss with OSHPark that I can't have any rewards for each people ordering my boards, this would allow me to order free PCB for shared projects and create new ones. For information my shared boards generated a total of **$285 162.00** orders at PCBs.io in 4 years, not bad at all :-)
 
@@ -37,7 +46,7 @@ Hoping one day OSHparks will thanks me giving them this market.
 
 ### Assembled boards
 
-**Top & bottom side V1.0**
+**Top & bottom side**
 
 TBD
 
